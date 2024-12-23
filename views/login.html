@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        input {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 1rem;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+
+        .forgot-password a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form action="#" method="POST" id="login">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <div id="correct"></div>
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+        <p class="signup-link">Don't have an account? <a href="/users">Sign up</a></p>
+    </div>
+
+    <script>
+        document.getElementById("login").addEventListener('submit',(event)=>{
+            event.preventDefault();
+        const email=document.getElementById("email").value;
+        const pwd=document.getElementById("password").value;
+        fetch("/login",{
+            method:"POST",
+            headers:{"Content-type":"application/json"},
+            body:JSON.stringify({
+                email:email,
+                pwd:pwd
+            })
+        }).then(response=>response.json()).then(data=>{
+            console.log(data.message);
+            if(data.message!=="Invalid email or password."){
+                document.getElementById("correct").innerHTML=data.message;
+                setTimeout(() => {
+                    window.location.href = "/";
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                }, 3000);
+                console.log(data.user);
+            }else{
+                document.getElementById("correct").innerHTML=data.message;
+            }
+           
+        }).catch((error) => document.getElementById("id").innerHTML=data.message);
+    });
+    </script>
+</body>
+</html>

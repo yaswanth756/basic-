@@ -1,0 +1,551 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+:root {
+    --primary: #1e3d59;
+    --secondary: #ff6e40;
+    --light: #f5f5f5;
+    --dark: #333;
+    --gold: #ffc13b;
+}
+
+/* 1. Header Styles */
+.header {
+    background: rgba(30, 61, 89, 0.95);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+/* Profile Section */
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+    font-weight: 500;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--light);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    min-width: 150px;
+    z-index: 2000;
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: var(--dark);
+    padding: 0.75rem 1rem;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background: var(--secondary);
+    color: white;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
+/* 2. Hero Section Styles */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x1080');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 1rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    line-height: 1.5;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--secondary);
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--gold);
+    color: var(--dark);
+}
+/* Button Styles */
+.btn {
+padding: 0.8rem 2rem;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-weight: bold;
+transition: all 0.3s;
+}
+
+.btn-primary {
+background: var(--secondary);
+color: white;
+}
+
+.btn-primary:hover {
+background: #ff5722;
+}
+
+/* 3. Rooms Section Styles */
+.rooms {
+padding: 5rem 2rem;
+background: var(--light);
+}
+
+.section-title {
+text-align: center;
+font-size: 2rem;
+color: var(--primary);
+margin-bottom: 3rem;
+}
+
+.rooms-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.room-card {
+background: white;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+transition: transform 0.3s;
+}
+
+.room-card:hover {
+transform: translateY(-5px);
+}
+
+.room-image {
+height: 200px;
+background: url('/api/placeholder/400/200');
+background-size: cover;
+}
+
+.room-info {
+padding: 1.5rem;
+}
+
+.room-type {
+font-size: 1.3rem;
+color: var(--primary);
+margin-bottom: 0.5rem;
+}
+
+.room-price {
+color: var(--secondary);
+font-size: 1.2rem;
+font-weight: bold;
+margin-bottom: 1rem;
+}
+
+.room-features {
+margin: 1rem 0;
+display: flex;
+flex-wrap: wrap;
+gap: 1rem;
+}
+
+.feature {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+font-size: 0.9rem;
+}
+
+/* 4. Booking Form Styles */
+/* Booking Form Section */
+.booking {
+padding: 5rem 2rem;
+background: #fff;
+text-align: center;
+animation: fadeIn 1s ease-in-out;
+}
+
+.booking-form {
+max-width: 800px;
+margin: 0 auto;
+background: #f8f8f8;
+padding: 2rem;
+border-radius: 10px;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+animation: slideIn 1s ease-out;
+}
+
+.form-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1.5rem;
+}
+
+.form-group {
+margin-bottom: 1.5rem;
+position: relative;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 0.5rem;
+color: #333;
+font-size: 1.1rem;
+}
+
+.form-group i {
+position: absolute;
+left: 10px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 1.2rem;
+color: #5cb85c;
+}
+
+.form-group input,
+.form-group select {
+width: 100%;
+padding: 0.8rem 0.8rem 0.8rem 35px;
+border: 1px solid #ddd;
+border-radius: 5px;
+font-size: 1rem;
+transition: border 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+border: 2px solid #5cb85c;
+}
+
+.btn-primary {
+background-color: #5cb85c;
+color: #fff;
+padding: 1rem 2rem;
+border: none;
+border-radius: 5px;
+font-size: 1rem;
+cursor: pointer;
+text-align: center;
+transition: background-color 0.3s ease;
+margin-top: 2rem;
+}
+
+.btn-primary:hover {
+background-color: #4cae4c;
+transform: scale(1.05);
+animation: bounce 0.3s ease-in-out;
+}
+
+/* Animation for form fields */
+@keyframes slideIn {
+0% { opacity: 0; transform: translateY(20px); }
+100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+/* Button bounce animation */
+@keyframes bounce {
+0%, 20%, 50%, 80%, 100% {
+transform: translateY(0);
+}
+40% {
+transform: translateY(-10px);
+}
+60% {
+transform: translateY(-5px);
+}
+}
+
+
+/* 5. Reviews Section Styles */
+/* Reviews Section Styles */
+.reviews {
+background-color: #f9f9f9;
+padding: 60px 20px;
+text-align: center;
+}
+
+.section-title {
+font-size: 2.5rem;
+margin-bottom: 40px;
+color: #333;
+text-transform: uppercase;
+}
+
+.reviews-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 30px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.review-card {
+background-color: white;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+text-align: left;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.stars {
+color: #ffb400;
+margin-bottom: 10px;
+}
+
+.stars i {
+margin-right: 3px;
+}
+
+.review-text {
+font-size: 1.1rem;
+line-height: 1.6;
+margin-bottom: 15px;
+color: #555;
+}
+
+.reviewer {
+font-style: italic;
+color: #777;
+font-weight: bold;
+}
+.reviews-more {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.see-more-link {
+    color: #ff6e40;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.see-more-link:hover {
+    color: #ffc13b;
+}
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+.section-title {
+font-size: 2rem;
+}
+
+.reviews-grid {
+grid-template-columns: 1fr;
+}
+}
+/* Footer Section Styles */
+.footer {
+background-color: #333;
+color: #fff;
+padding: 40px 20px;
+font-family: Arial, sans-serif;
+}
+
+.footer-content {
+display: flex;
+justify-content: space-between;
+margin-bottom: 40px;
+flex-wrap: wrap;
+}
+
+.footer-section {
+flex: 1;
+min-width: 250px;
+margin: 0 20px;
+}
+
+.footer-section h3 {
+font-size: 1.6rem;
+margin-bottom: 15px;
+text-transform: uppercase;
+font-weight: bold;
+color: #f1f1f1;
+}
+
+.footer-section p {
+font-size: 1rem;
+margin-bottom: 10px;
+color: #ddd;
+}
+
+.footer-section a {
+color: #ddd;
+text-decoration: none;
+}
+
+.footer-section a:hover {
+color: #ffb400;
+}
+
+.social-links a {
+color: #ddd;
+margin-right: 10px;
+font-size: 1.4rem;
+transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+color: #ffb400;
+}
+
+.footer-bottom {
+text-align: center;
+padding: 20px;
+background-color: #222;
+font-size: 0.9rem;
+color: #bbb;
+}
+
+.footer-bottom p {
+margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+.footer-content {
+flex-direction: column;
+align-items: center;
+}
+
+.footer-section {
+margin: 20px 0;
+text-align: center;
+}
+
+.footer-bottom {
+font-size: 0.8rem;
+}
+}
+#background-light {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+display: none;  /* Hidden by default */
+align-items: center;
+justify-content: center;
+z-index: 1000;
+}
+
+.login-prompt {
+background-color: white;
+padding: 2rem;
+text-align: center;
+border-radius: 8px;
+}
+
+#doneButton {
+margin-top: 20px;
+padding: 10px 20px;
+background-color: red;
+color: white;
+border: none;
+cursor: pointer;
+font-size: 1rem;
+border-radius: 5px;
+}
+
+/* Optionally, style hover effects or active states */
+#doneButton:hover {
+background-color: darkred;
+}

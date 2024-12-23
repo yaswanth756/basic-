@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .signup-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        input {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .signup-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <form action="#" method="POST" id="sign">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+    
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" pattern="^\d{10}$" required placeholder="Enter a 10-digit phone number">
+    
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+    
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            <div id="correct"></div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="/login">Log in</a></p>
+    </div>
+    
+    <script>
+        document.getElementById("sign").addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value; // Get phone number
+            const pwd = document.getElementById("password").value;
+            const cpwd = document.getElementById("confirm-password").value;
+    
+            if (pwd !== cpwd) {
+                document.getElementById("correct").innerHTML = "Please check password";
+            } else {
+                fetch("/newuser/booking", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify({ name: username, email: email, password_hash: pwd , phone: phone}) 
+                }).then(response => response.json()).then(data => {
+                    console.log(data.message);
+    
+                    if (data.message === "User signed up successfully!") {
+                        const feedbackElement = document.getElementById("correct");
+                        feedbackElement.style.color = "green";
+                        feedbackElement.innerHTML = `${data.message}. Redirecting to login page...`;
+    
+                        // Delay the redirection for 3 seconds
+                        setTimeout(() => {
+                            window.location.href = "/login";
+                        }, 3000);
+                    } else {
+                        document.getElementById("correct").innerHTML = data.message;
+                    }
+                })
+            }
+        }).catch((error) => console.error("Error:", error));
+    </script>
+    
+</body>
+</html>
